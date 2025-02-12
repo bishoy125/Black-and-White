@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - My Online Store</title>
+    <style>
+        /* General body styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://img.freepik.com/premium-photo/abstract-smoke-ink-blots-smoky-wallpaper_1230902-19441.jpg?semt=ais_hybrid');
+            background-size: cover; /* Ensures the background covers the entire page */
+            background-position: center;
+            background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            color: white; /* White text to contrast with dark background */
+            height: 100vh;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        /* Checkout Cart */
+        .checkout-cart {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Section */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">&#8592; Back</a>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Checkout</h1>
+    </header>
+
+    <!-- Checkout Cart -->
+    <div class="checkout-cart">
+        <h3>Your Cart</h3>
+        <div id="checkout-items"></div>
+        <p id="checkout-total">Total: $0.00</p>
+        <button id="confirm-checkout">Confirm Checkout</button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Checkout</p>
+    </footer>
+
+    <script>
+        // Get cart data from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Update checkout cart display and calculate total
+        const updateCheckout = () => {
+            const checkoutItems = document.getElementById('checkout-items');
+            const checkoutTotal = document.getElementById('checkout-total');
+            checkoutItems.innerHTML = ''; // Clear previous items
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                checkoutItems.innerHTML += `<div class="product-item">
+                    <span>${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</span>
+                </div>`;
+            });
+
+            checkoutTotal.textContent = `Total: $${total.toFixed(2)}`;
+        };
+
+        // Confirm checkout
+        document.getElementById('confirm-checkout').onclick = () => {
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            if (total > 0) {
+                alert(`Your total is $${total.toFixed(2)}. Proceeding to payment...`);
+                localStorage.removeItem('cart'); // Clear cart from localStorage after checkout
+                window.location.href = 'index.html'; // Redirect to home page
+            } else {
+                alert("Your cart is empty! Please add some items before checking out.");
+            }
+        };
+
+        // Call updateCheckout to display the cart items and total
+        updateCheckout();
+    </script>
+
+</body>
+</html>

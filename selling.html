@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Sell Your Stuff</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General body and layout styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation bar */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Form and listing styling */
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .listing-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .listing {
+            width: 220px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .listing img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .listing h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .price {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* Back button styling */
+        .back-button {
+            font-size: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #000;
+            display: flex;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .back-button i {
+            margin-right: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .listing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+
+    <!-- Header -->
+    <header>
+        <h1>Marketplace - Sell Your Stuff</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Item Listing Form -->
+        <h2>List an Item</h2>
+        <form id="sellForm">
+            <input type="text" id="itemTitle" placeholder="Item Title" required>
+            <textarea id="itemDescription" placeholder="Item Description" required></textarea>
+            <input type="number" id="itemPrice" placeholder="Price ($)" required>
+            <select id="itemCategory" required>
+                <option value="">Select Category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Furniture">Furniture</option>
+            </select>
+            <input type="file" id="itemImage" accept="image/*" required>
+            <input type="email" id="contactEmail" placeholder="Your Email" required>
+            <button type="submit">List Item</button>
+        </form>
+
+
+
+
+
+
+
+
+       
+    </main>
+
+    <script>
+        // Load saved listings from localStorage or initialize an empty array
+        const listings = JSON.parse(localStorage.getItem('listings')) || [];
+
+        // Handle form submission to add new listings
+        document.getElementById('sellForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const newItem = {
+                title: document.getElementById('itemTitle').value,
+                description: document.getElementById('itemDescription').value,
+                price: document.getElementById('itemPrice').value,
+                category: document.getElementById('itemCategory').value,
+                image: URL.createObjectURL(document.getElementById('itemImage').files[0]),
+                email: document.getElementById('contactEmail').value,
+            };
+            listings.push(newItem);
+            localStorage.setItem('listings', JSON.stringify(listings));
+            document.getElementById('sellForm').reset();
+            displayListings();
+        });
+
+        // Display all listings
+        function displayListings() {
+            const container = document.getElementById('listingContainer');
+            container.innerHTML = '';
+            listings.forEach(item => {
+                const listing = document.createElement('div');
+                listing.classList.add('listing');
+                listing.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p class="price">$${item.price}</p>
+                    <p>${item.category}</p>
+                    <p>Contact: <a href="mailto:${item.email}">${item.email}</a></p>
+                `;
+                container.appendChild(listing);
+            });
+        }
+
+        // Filter listings based on search term and category
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const filtered = listings.filter(item => 
+                (item.title.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm)) && 
+                (categoryFilter ? item.category === categoryFilter : true)
+            );
+            displayFilteredListings(filtered);
+        }
+
+        // Display filtered listings
+        function displayFilteredListings(filtered) {
+            const container = document.getElementById('listingContainer');
+            container.innerHTML = '';
+            filtered.forEach(item => {
+                const listing = document.createElement('div');
+                listing.classList.add('listing');
+                listing.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p class="price">$${item.price}</p>
+                    <p>${item.category}</p>
+                    <p>Contact: <a href="mailto:${item.email}">${item.email}</a></p>
+                `;
+                container.appendChild(listing);
+            });
+        }
+
+        // Display listings initially
+        displayListings();
+    </script>
+
+</body>
+</html>

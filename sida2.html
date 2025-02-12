@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Welcome to our website. Explore our pages, shop products, and learn more about us.">
+  <meta name="keywords" content="Website, Shop, About Us, Code of Conduct">
+  <meta name="author" content="Your Name or Company">
+  <title>My Website - Explore, Shop, and Learn More</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Apply background image */
+    body {
+      background-image: url('https://img.freepik.com/premium-photo/abstract-smoke-ink-blots-smoky-wallpaper_1230902-19441.jpg?semt=ais_hybrid');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Navigation Bar */
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: #007BFF;
+      color: #fff;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 2px solid #fff;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      color: #fff;
+      background-color: #007BFF;
+    }
+
+    /* Main Content Section */
+    main {
+      text-align: center;
+      padding: 60px;
+      background-color: rgba(0, 0, 0, 0.6); /* Added a dark overlay for readability */
+      border-radius: 10px;
+      max-width: 900px;
+      margin: 50px auto;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px auto;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    /* Code of Conduct Section */
+    .code-of-conduct {
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for readability */
+      padding: 25px;
+      margin-top: 40px;
+      border-radius: 10px;
+    }
+
+    .code-of-conduct h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #f4f4f4;
+    }
+
+    .code-of-conduct ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .code-of-conduct li {
+      margin: 10px 0;
+    }
+
+    .code-of-conduct p {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #ddd;
+    }
+
+    /* About Us Section */
+    .about-us {
+      margin-top: 50px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .about-us h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .about-us p {
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    footer a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" title="Go to the home page">Home</a></li>
+        <li><a href="sida3.html" title="Visit our shop">Shop</a></li>
+        <li><a href="About.html" title="Learn more about us">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Back Button with Unicode Arrow -->
+  <a href="javascript:history.back()" class="back-button" aria-label="Go Back">&#8592; Back</a>
+
+  <!-- Main Content Section -->
+  <main>
+    <section class="hero">
+      <h1>Welcome to Our Website</h1>
+      <p>We are delighted to have you here. Explore our website, shop for unique items, and learn about our mission. Stay with us and be part of an amazing journey!</p>
+    </section>
+
+    <section class="code-of-conduct">
+      <h2>Code of Conduct</h2>
+      <p>We are committed to creating a safe, respectful, and positive environment for all our users. Please follow these guidelines:</p>
+      <ul>
+        <li><strong>Respect Others:</strong> Treat all users with kindness and courtesy.</li>
+        <li><strong>Be Constructive:</strong> Engage in meaningful discussions and offer helpful feedback.</li>
+        <li><strong>No Harassment:</strong> Harassment, hate speech, or discriminatory actions are not tolerated.</li>
+        <li><strong>Follow the Law:</strong> All content and activities must comply with local and international laws.</li>
+        <li><strong>Stay Safe:</strong> Protect your personal information and respect others' privacy.</li>
+      </ul>
+      <p>By adhering to these guidelines, we can ensure a positive and welcoming experience for everyone.</p>
+    </section>
+
+    <section class="about-us">
+      <h2>About Us</h2>
+      <p>Our website was founded with the goal of bringing high-quality products and informative content to the community. We strive to create an accessible, enjoyable, and meaningful online environment for all our visitors. Whether you're here to shop, learn, or interact, we are committed to your satisfaction and safety.</p>
+      <p>Our mission is to be the most trusted and reliable source of products and services, continuously evolving to meet your needs. We value transparency, responsibility, and accountability in everything we do.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 My Website. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+  </footer>
+
+</body>
+
+</html>
